@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="POJO.UserInfoPO" table="userinfo" catalog="ssh">
+	<id name="id" type="int">
+      		<column name="id"/>
+      		<generator class="increment"/>
+    </id>
+	<!--property元素配置PO对象中的某个属性对应的表中某个字段名，即实现一一对应的映射关系。name指定PO对象的属性，type指定属性的类型。-->
+    	<property name="username" type="string">
+	<!--column元素配置对应的表中字段，name指定对应表的字段，length指定字段长度，not-null 设置字段是否为空。-->
+      		<column name="username" length="30" not-null="true"/>
+    	</property>
+    	<property name="password" type="string">
+      		<column name="password" length="30" not-null="true"/>
+    	</property>
+</class>
+</hibernate-mapping>

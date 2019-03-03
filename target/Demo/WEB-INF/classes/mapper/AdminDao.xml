@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.AdminDao">
+    <!-- 目的：为DAO接口方法提供sql语句配置 -->
+    <!-- 教室信息查询 -->
+    <select id="getRoomInfoList" resultType="entity.RoomInfo" parameterType="java.lang.String">
+
+    SELECT * FROM classroominfo
+
+    <if test='keywords!=""'>
+    where concat(ifnull(number,''),ifnull(address,''),ifnull(capacity,''),ifnull(configuration,''))  like "%"#{keywords}"%"
+    </if>
+
+    </select>
+
+    <!-- 教室信息记录数查询 -->
+    <select id="getRoomInfoCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT count(*) FROM classroominfo
+
+        <if test='keywords!=""'>
+            where concat(ifnull(number,''),ifnull(address,''),ifnull(capacity,''),ifnull(configuration,''))  like "%"#{keywords}"%"
+        </if>
+    </select>
+
+
+    <!-- 取得记录的总数 -->
+    <select id="getCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        <choose>
+      <when test="type=''">
+        SELECT COUNT(*) FROM ${table}
+        </when>
+
+        <otherwise>
+        SELECT   COUNT(*) FROM account  where type=#{type}
+        </otherwise>
+        </choose>
+    </select>
+
+     <!--教室预订操作记录 -->
+    <select id="getOrderOperationList" resultType="entity.OrderOperation" parameterType="java.lang.String">
+        SELECT * FROM orderoperation
+        <if test='keywords!=""'>
+            where concat(ifnull(number,''),ifnull(address,''),ifnull(orderdate,''),ifnull(time,''),ifnull(user,''),ifnull(reason,'')) like "%"#{keywords}"%"
+        </if>
+        limit #{startPos},#{pageSize}
+    </select>
+
+
+    <!-- 教室预订操作记录数查询 -->
+    <select id="getOrderOperationCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT count(*) FROM orderoperation
+
+        <if test='keywords!=""'>
+            where concat(ifnull(number,''),ifnull(address,''),ifnull(orderdate,''),ifnull(time,''),ifnull(user,''),ifnull(reason,'')) like "%"#{keywords}"%"
+        </if>
+    </select>
+
+
+    <!--修改教室预订状态记录 -->
+    <update id="insertRecordInfo" parameterType="String">
+
+        UPDATE orderrecord SET result = #{result} where id in (${id})
+    </update>
+
+    <!--教室预订记录展示-->
+    <select id="getOrderRecordList" resultType="java.util.HashMap">
+        SELECT * FROM orderrecord
+        <if test='keywords!=""'>
+            where concat(ifnull(number,''),ifnull(address,''),ifnull(orderdate,''),ifnull(time,''),ifnull(user,''),ifnull(reason,''),ifnull(result,'')) like "%"#{keywords}"%"
+        </if>
+        limit #{startPos},#{pageSize}
+    </select>
+
+
+    <!--教室预订记录数统计-->
+    <select id="getOrderRecordListCount" resultType="Integer">
+        SELECT count(*) FROM orderrecord
+        <if test='keywords!=""'>
+            where concat(ifnull(number,''),ifnull(address,''),ifnull(orderdate,''),ifnull(time,''),ifnull(user,''),ifnull(reason,''),ifnull(result,'')) like "%"#{keywords}"%"
+        </if>
+    </select>
+
+
+
+    <!--用户信息页面展示 -->
+    <select id="getAccountInfoList" resultType="java.util.HashMap">
+     SELECT * FROM account
+        <if test="keywords!=''">
+            and concat(ifnull(account,''),ifnull(name,''),ifnull(academy,''),ifnull(major,''),ifnull(tel,''),ifnull(mail,'')) like "%"#{keywords}"%"
+        </if>
+
+        limit #{startPos},#{pageSize}
+    </select>
+
+    <!--用户信息记录数统计 -->
+    <select id="getAccountInfoListCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM account
+        <if test="keywords!=''">
+            and concat(ifnull(account,''),ifnull(name,''),ifnull(academy,''),ifnull(major,''),ifnull(tel,''),ifnull(mail,'')) like "%"#{keywords}"%"
+        </if>
+
+
+    </select>
+
+    <!--信息添加-->
+
+            <insert id="insertRoomInfo" parameterType="entity.RoomInfo" >
+
+                insert ignore into classroominfo(number,address,capacity,configuration) values(#{number},#{address},#{capacity},#{configuration})
+            </insert>
+
+
+    <insert id="batchInsert" parameterType="java.util.List">
+
+        INSERT INTO account_copy(account,password,name,academy,major,tel,mail) VALUES
+        <foreach collection="list" separator="," item="item">
+            (#{item.account},#{item.password},#{item.name},#{item.academy},#{item.major},#{item.tel},#{item.mail})
+                </foreach>
+
+
+            </insert>
+
+
+
+
+
+
+    </mapper>

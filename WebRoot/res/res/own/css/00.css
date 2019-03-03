@@ -1,0 +1,28 @@
+﻿ul { 
+list-style: none; 
+margin: 0; 
+padding: 0; 
+} 
+#menu3 { 
+width: 160px; 
+border: 1px solid #ccc; 
+margin-top: 140px; margin-left:100px;
+} 
+#menu3 li a { 
+height: 32px; 
+voice-family: "\"}\""; 
+voice-family: inherit; 
+height: 24px; 
+text-decoration: none; 
+} 
+#menu3 li a:link, #menu3 li a:visited { 
+color: #888; 
+display: block; 
+background: url(/upload/2010-3/20100303231545473.gif); 
+padding: 8px 0 0 30px; 
+} 
+#menu3 li a:hover, #menu3 li a:active { 
+color: #ffffff; 
+background: url(/upload/2010-3/20100303231637519.png) 0 -32px; 
+padding: 8px 0 0 30px; 
+} 

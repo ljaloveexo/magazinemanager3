@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserDao">
+    <!-- 目的：为DAO接口方法提供sql语句配置 -->
+    <!-- 查询用户和密码进行登录 -->
+    <select id="findByUsername" resultType="USER"  parameterType="String">
+
+        select * from account where account = #{username}
+
+    </select>
+
+    <!-- 目的：为DAO接口方法提供sql语句配置 -->
+    <!-- 查询用户预定结果 -->
+    <select id="findOrderResultByUser" resultType="entity.OrderResult" >
+
+        select * from orderrecord where user = #{username}
+        <if test='keywords!=""'>
+            and concat(ifnull(number,''),ifnull(address,''),ifnull(orderdate,''),ifnull(time,''),ifnull(reason,'')) like "%"#{keywords}"%"
+        </if>
+        limit #{startPos},#{pageSize}
+
+
+    </select>
+
+    <!-- 取得记录的总数 -->
+        <select id="getCount" resultType="java.lang.Integer">
+             SELECT COUNT(*) FROM orderrecord where user = #{username}
+            <if test='keywords!=""'>
+                and concat(ifnull(number,''),ifnull(address,''),ifnull(orderdate,''),ifnull(time,''),ifnull(reason,'')) like "%"#{keywords}"%"
+            </if>
+       </select>
+    <!-- 教室信息 -->
+    <select id="getRoomInfoAll" resultType="entity.RoomInfo">
+        SELECT * FROM classroominfo
+    </select>
+
+    <!-- 用户预订记录 -->
+    <insert id="insertOrderResultByUser" parameterType="entity.OrderResult" >
+        insert into  orderrecord(number,address,orderdate,time,user,reason,result) values (#{number},#{address},#{orderdate},#{time},#{user},#{reason},#{result})
+    </insert>
+
+    <!-- 用户预订记录检查 -->
+    <select id="getRecordCount" resultType="java.lang.Integer">
+       SELECT COUNT(*) FROM orderrecord where number=#{number} and orderdate=#{orderdate} and time=#{time}
+    </select>
+
+    <!--删除预定结果操作-->
+    <delete id="deleteOrder" parameterType="java.lang.Integer">
+        delete from orderrecord where id=#{id}
+    </delete>
+
+
+
+
+
+</mapper>

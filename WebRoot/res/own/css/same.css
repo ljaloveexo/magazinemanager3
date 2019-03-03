@@ -1,0 +1,58 @@
+
+.bt h1{text-align:center;margin:0 auto;margin-top:40px;}
+#menu3 ul { 
+list-style: none; 
+margin: 0; 
+padding: 0; 
+} 
+#menu3 { 
+width: 160px; 
+border: 1px solid #ccc; 
+margin-top: 45px; margin-left:100px;float:left;
+} 
+#menu3 li a { 
+height: 32px; 
+voice-family: "\"}\""; 
+voice-family: inherit; 
+height: 24px; 
+text-decoration: none; 
+} 
+#menu3 li a:link, #menu3 li a:visited { 
+color:black; 
+display: block; 
+background: url(/upload/2010-3/20100303231545473.gif); 
+padding: 8px 0 0 30px; 
+} 
+#menu3 li a:hover, #menu3 li a:active { 
+color: #ffffff; 
+background: url(/upload/2010-3/20100303231637519.png) 0 -32px; 
+padding: 8px 0 0 30px; 
+}
+#footer2{width:1300px;margin:0 auto;margin-top:500px;}
+.i{margin-left:400px;margin-top:70px;}
+
+.i table tr td {width:200px;height:25px;text-align:center;} 
+.form2{margin-top:60px;}
+.form4{width:317px;margin-left:700px;margin-top:-41px;}
+.form3 {margin-left:600px;margin-top:-160px;}
+.form9{margin-left:710px;margin-top:-40px;}
+.submit{width:50px;margin-left:-70px;}
+
+.copyright{
+	clear:both;
+	margin:auto;
+	text-align:center;
+	margin-bottom:0px;
+}
+
+.search{
+	width:400px;
+	margin:auto;
+}
+.update{width:50px;margin-left:-75px;}
+.delete{width:50px;margin-left:-470px;margin-top:50px;}
+.exit{width:70px;}
+#Button1{width:50px;margin-left:-560px;height:30px;margin-top:50px;}
+.index{width:1500px;margin-left:480px;margin-top:200px;}
+.admin{width:200px;height:100px;}
+.user{width:200px;height:100px;margin-left:20px;}
